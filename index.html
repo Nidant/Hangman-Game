@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Overwatch: Hangman</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Brand</a>
+	    </div>
+	    <!--Win/Loss-->
+    	<ul class="nav nav-pills navbar-right">
+		  <li role="presentation" class="navbar-text">Wins <strong id="wins">0</strong></li>
+		  <li role="presentation" class="navbar-text">Losses <strong id="losses">0</strong></li>
+		</ul>
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<!--Main Body-->
+	<div class="container">
+		<div class="row">
+			<!--Right Column -->
+			<div class="col-lg-3 col-lg-offset-1">
+				<img class="rounded mx-auto d-block" src="assets\images\McCree_Spray_-_Noose_258x410.png">
+			</div><!-- /.row left-->
+			<!--Center Column -->
+			<div class="col-lg-4">
+				<div class="row">
+					<h2>The catigory is </h2>
+				</div>
+				<div class="row">
+					<h3 id="wordPost"></h3>
+				</div>
+			</div><!-- /.row center-->
+			<!--Right Column -->
+			<div class="col-lg-3 text-center">
+				<!--Guess-->
+				<div class="row">
+					<div class="col-lg-6">
+						<h5>Wrong</h5>
+						<h5 id="wrongGuess">1</h5>
+					</div>
+					<div class="col-lg-6">
+						<h5>left</h5>	
+						<h5 id="guessLeft" >12</h5>
+					</div>
+				</div><!-- /.row right/top -->
+				<!--Letters Guessed-->
+				<div class="row">
+					<h4>Guesses</h4>
+					<h5 id="lettersGuessed"></h5>
+				</div><!-- /.row right/bottom -->
+			</div><!-- /.row right-->
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+	<footer class="footer">
+      <div class="container-fluid">
+        <p class="text-muted text-center">Copyright &copy;Khristopher T Watters. All rights reserved.</p>
+      </div>
+    </footer>
+    <script type="assets\js\script.js"></script>
+</body>
+</html>
