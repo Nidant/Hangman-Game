@@ -1,0 +1,49 @@
+body{
+	font-family: 'Noto Sans', sans-serif;
+	color: #00b4ff;
+	background-image: url("../images/background-overwatch-top.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center -200px;
+
+}
+
+.messageBoard{
+	background-image: url("../images/Background.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    color: #405275;
+	height: 500px;
+	width: 600px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -250px;
+	margin-left: -300px;
+	z-index: 99;
+	border-radius: 25px;
+}
+
+.startScreen{
+	background-image: url();
+	margin-top: 204px; 
+}
+
+.winScreen{
+	display: none;
+	margin-top: 204px;
+
+}
+
+.lossScreen{
+	display: none;
+	margin-top: 204px;
+
+}
+
+h2{
+	margin-top: 5px;
+}

@@ -2,10 +2,13 @@
 <html>
 <head>
 	<title>Overwatch: Hangman</title>
+	<link rel="stylesheet" type="text/css" href="assets\css\reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets\css\style.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-inverse">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -18,6 +21,22 @@
 		</ul>
 	  </div><!-- /.container-fluid -->
 	</nav>
+	<div class="messageBoard"><!--Message Boxs-->
+		<div class="startScreen rounded"><!--Start Screen-->
+			<h2 class="text-center">Welcome to Overwatch Hangman</h2>
+			<p class="text-center">Press any button to continue</p>
+		</div><!--/Start Screen-->
+		<div class="winScreen"><!--Win Screen-->
+			<h2 class="text-center">You did it!!!! You won your<strong id="wins">0</strong> game!</h2>
+			<p class="text-center">Press anykey to start the next game.</p>
+			<button class="btn btn-primary center-block">Start Fresh</button>
+		</div><!--/Win Screen-->
+		<div class="lossScreen"><!--Loss Screen-->
+			<h2 class="text-center">Bummer! Better luck next game!</h2>
+			<p class="text-center">Press anykey to try again.</p>
+			<button class="btn btn-primary center-block">Start Fresh</button>
+		</div><!--/Loss Screen-->
+	</div><!--/Message Boxs-->
 	<!--Main Body-->
 	<div class="container">
 		<div class="row">
@@ -40,11 +59,11 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<h5>Wrong</h5>
-						<h5 id="wrongGuess">1</h5>
+						<h5 id="wrongGuess">0</h5>
 					</div>
 					<div class="col-lg-6">
 						<h5>left</h5>	
-						<h5 id="guessLeft" >12</h5>
+						<h5 id="guessLeft">13</h5>
 					</div>
 				</div><!-- /.row right/top -->
 				<!--Letters Guessed-->
@@ -55,7 +74,7 @@
 			</div><!-- /.row right-->
 		</div><!-- /.row -->
 	</div><!-- /.container -->
-	<footer class="footer">
+	<footer class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
       <div class="container-fluid">
         <p class="text-muted text-center">Copyright &copy;Khristopher T Watters. All rights reserved.</p>
       </div>
