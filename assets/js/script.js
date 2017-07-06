@@ -6,9 +6,10 @@
 		guessLeftPost = document.getElementById("guessLeft"),
 		winPost = document.getElementById("wins"),
 		lossPost = document.getElementById("losses"),
-		loadScreen = document.getElementById(""), 
-		winScreen = document.getElementById(""),
-		lossScreen = document.getElementById(""),
+		messageBoard = document.getElementById("messageBoard"),
+		loadScreen = document.getElementsByClassName("startScreen")[0], 
+		winScreen = document.getElementsByClassName("winScreen")[0],
+		lossScreen = document.getElementsByClassName("lossScreen")[0],
 		flagStart = false,
 		flagWin = false,
 		flagLoss = false,
@@ -23,7 +24,7 @@
 		guessedWordArray = [],
 		categoryList = ["characters", "levels"],
 		characters = ["Genji", "McCree", "Pharah", "Reaper", "Solder: 76", "Sombara", "Tracer", "Bastion", "Hanzo", "Junkrat", "Mei", "Torbjorn", "Widowmaker", "D.VA", "Orisa", "Reinhardt", "Roadhog", "Winston", "Zarya", "Ana", "Lucio", "Mercy", "Symmetra", "Zenyatta"],
-		maps = ["Hanamura","Horizon Lunar Colony"," Temple of Anubis","Volskaya Industries","Dorado","Route 66","Watchpoint Gibraltar","Hollywood","Kings Row","Numbani","Eichenwalde","Ilios","Lijang Tower","Nepal","Oasis","Black Forest","Castillo","Encopoint Antarctica","Necropolis",];
+		levels = ["Hanamura","Horizon Lunar Colony"," Temple of Anubis","Volskaya Industries","Dorado","Route 66","Watchpoint Gibraltar","Hollywood","Kings Row","Numbani","Eichenwalde","Ilios","Lijang Tower","Nepal","Oasis","Black Forest","Castillo","Encopoint Antarctica","Necropolis",];
 
 
 
@@ -35,10 +36,18 @@
 
 		//load event into local var
 		var letter = event.key;
-		console.log(letter);
+		console.log("Letter is now " + letter);
 		
 		//check if flagStart is true
-		if(!flagStart||flagWin||flagloss){
+		if(!flagStart||flagWin||flagLoss){
+
+			//reset vars for next game
+			guessedWordArray = [];
+			wordArray = [];
+			wrongGuessCount = 0;
+			guessedwordArray = [];
+
+			//print words to screen
 			pressAnyKey();
 			//selects the subject catigory, selects word and loads it, prints word to the screen
 			Selector();
@@ -48,6 +57,14 @@
 
 			//compares code and updats screen
 			guessCompare(letter);
+
+			//for testing
+			console.log("Test Test Test guessArray is now: " + guessArray);
+
+
+			printWord();
+
+
 			}
 
 	},true );
@@ -55,9 +72,11 @@
 //functions=====================================================================================================
 	
 	//Prints guessed word to the Viewpoint
-	function printWord(guessArray){
-		wordPost.innerText = guessArray;
-		console.log("" + guessArray);
+	function printWord(){
+
+		wordPost.innerText = guessedWordArray.join("");
+		console.log("GuessWordArray printed " + guessedWordArray.join(""));
+		console.log("GuessWordArray value is now " + guessedWordArray);
 	}
 
 
@@ -71,6 +90,7 @@
 			console.log("flagStart is now: " + flagStart);
 
 			//Hide message
+			messageBoard.style.display = "none";
 			loadScreen.style.display = "none";
 
 		}else if(flagWin){
@@ -79,6 +99,7 @@
 			console.log("flagWin is now: " + flagWin);
 
 			//Hide Message
+			messageBoard.style.display = "none";
 			winScreen.style.display = "none";
 
 		}else if(flagLoss){
@@ -87,7 +108,9 @@
 			console.log("flagWin is now: " + flagWin);
 
 			//Hide Message
+			messageBoard.style.display = "none";
 			lossScreen.style.display = "none";
+
 		}
 	}
 
@@ -98,7 +121,7 @@
 	function Selector(){
 
 		//selects random category
-		category = categoryList[Math.floor(math.random()*categoryList.length)]
+		category = categoryList[Math.floor(Math.random()*categoryList.length)]
 		console.log("Category Var is set to: " + category);
 
 		//runs wordSelectLoad
@@ -111,28 +134,62 @@
 	//selects word and loads it into wordArray, and word
 	function wordSelectLoad(category){
 
-		//selects word
-		word = category[Math.floor(Math.random()*category.length)];
-		console.log("Word is set to: " + word)
+		if(category === "characters"){
+			//selects word
+			word = characters[Math.floor(Math.random()*characters.length)];
+			console.log("Word is set to: " + word);
 
-		//loads word into wordArray
-		wordArray = word.split("");
-		console.log("wordArray is set to: " +  wordArray)
+			//loads word into wordArray
+			wordArray = word.split("");
+			console.log("wordArray is set to: " +  wordArray);
 
-		//Loads into Guess word
-		for (var i = 0; i < wordArray.length; i++) {
+			//Loads into Guess word
+			for (var i = 0; i < wordArray.length; i++) {
+				var word = wordArray[i];
+				var patt = /^[a-z0-9]+$/i;
+				var test = patt.test(word);
 
-			//tests if Word array is alphanumeric
-			if(wordArray[i].test(/[^0-9a-z]/i)){
+				//tests if Word array is alphanumeric
+				if(test){
 
-				//if alphanumeric load "_" into guessArray
-				guessArray.push("_");
-				console.log("guessArray is now set to: " + guessArray)
-			}else{
+					//if alphanumeric load "_" into guessedWordArray
+					guessedWordArray.push("_");
+					console.log("guessedWordArray is now set to: " + guessedWordArray);
+				}else{
 
-				//load special character or white space into array
-				guessArray[i] = wordArray[i];
-				console.log("guessArray is now set to: " +  guessArray)
+					//load special character or white space into array
+					guessedWordArray[i] = wordArray[i];
+					console.log("guessedWordArray is now set to: " +  guessedWordArray);
+				}
+			}
+		}
+		else{
+			//selects word
+			word = levels[Math.floor(Math.random()*levels.length)];
+			console.log("Word is set to: " + word);
+
+			//loads word into wordArray
+			wordArray = word.split("");
+			console.log("wordArray is set to: " +  wordArray);
+
+			//Loads into Guess word
+			for (var i = 0; i < wordArray.length; i++) {
+				var word = wordArray[i];
+				var patt = /^[a-z0-9]+$/i;
+				var test = patt.test(word);
+
+				//tests if Word array is alphanumeric
+				if(test){
+
+					//if alphanumeric load "_" into guessedWordArray
+					guessedWordArray.push("_");
+					console.log("guessedWordArray is now set to: " + guessedWordArray);
+				}else{
+
+					//load special character or white space into array
+					guessedWordArray[i] = wordArray[i];
+					console.log("guessedWordArray is now set to: " +  guessedWordArray)
+				}
 			}
 		}
 
@@ -158,9 +215,10 @@
 				//set test to false
 				test = false;
 
-				//set guessArray[i] value = to wordArray[i] value
-				guessArray[i] = wordArray[i];
-				console.log("Letter: " + letter + " was a match");
+				//set guessedWordArray[i] value = to wordArray[i] value
+				guessedWordArray[i] = wordArray[i];
+				//console.log("Letter: " + letter + " was a match");
+				console.log("guessedWordArray: " + guessedWordArray[i] + " was a match");
 			}
 		}
 
@@ -168,7 +226,7 @@
 		if(test){
 
 			//see wrong guess
-			wrongGuess();
+			wrongGuess(letter);
 
 		}else{
 
@@ -183,11 +241,16 @@
 
 	//check if game is won
 	function win(){
-		if(wordArray===guessArray){
+
+		var a = guessedWordArray.toString();
+		var b = wordArray.toString();
+
+		if(b===a){
 			//sets flagWin
 			flagWin = true;
 			//show messgae
 			winScreen.style.display = "block";
+			messageBoard.style.display = "block";
 			//update winCount
 			winCount++;
 			console.log("winCount is now: " + winCount)
@@ -200,10 +263,11 @@
 	//checks if the game is lost
 	function loss(){
 		if(wrongGuessCount >= maxGuess){
-			//sets flagloss
-			flagWin = true;
+			//sets flagLoss 
+			flagLoss = true;
 			//show messgae
 			lossScreen.style.display = "block";
+			messageBoard.style.display = "block";
 			//update lossCount
 			lossCount++;
 			console.log("lossCount is now: " + lossCount)
@@ -219,10 +283,13 @@
 		//var if word has not been tried
 		var test = true;
 
-		for (var i = 0; i < guessArray.length; i++) {
-			if(guessArray[i].toUpperCase()===letter.toUpperCase()){
-				test = false;
-				console.log("test is now: " + test);
+		//test if the guessArray null
+		if (guessArray.length > 1) {
+			for (var i = 0; i <= guessArray.length; i++) {
+				if(guessArray[i].toUpperCase()===letter.toUpperCase()){
+					test = false;
+					console.log("test is now: " + test);
+				}
 			}
 		}
 
@@ -230,7 +297,6 @@
 			//Increase the wrongGuessCount
 			wrongGuessCount++;
 			console.log("wrongGuessCount is now " + wrongGuessCount);
-
 			console.log("Pushing " + letter + " to guessArray");
 			guessArray.push(letter);
 			console.log("guessArray now reads: " + guessArray);		
