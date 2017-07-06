@@ -31,11 +31,10 @@
 
 //Listeners=====================================================================================================
 
-	document.onKeyUp = function(event){
+	window.addEventListener('keyup', function(event){
 
 		//load event into local var
-		var letter = event;
-		console.log(event);
+		var letter = event.key;
 		console.log(letter);
 		
 		//check if flagStart is true
@@ -51,17 +50,14 @@
 			guessCompare(letter);
 			}
 
-		}
-	}
-
-
+	},true );
 
 //functions=====================================================================================================
 	
 	//Prints guessed word to the Viewpoint
 	function printWord(guessArray){
 		wordPost.innerText = guessArray;
-		console.log("" + )
+		console.log("" + guessArray);
 	}
 
 
@@ -69,7 +65,7 @@
 
 	//press any key to start the game
 	function pressAnyKey(){
-		if(!flagStart){\
+		if(!flagStart){
 			//resets flagStart's value
 			flagStart = true;
 			console.log("flagStart is now: " + flagStart);
@@ -92,6 +88,7 @@
 
 			//Hide Message
 			lossScreen.style.display = "none";
+		}
 	}
 
 
@@ -214,7 +211,6 @@
 
 	}
 
-
 	//---------------------------------------------------------------------------------------------
 
 	//If guess is wrong do the following
@@ -255,3 +251,5 @@
 	}
 
 	//---------------------------------------------------------------------------------------------
+
+
