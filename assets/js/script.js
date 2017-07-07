@@ -3,7 +3,7 @@
 
 	var wordPost = document.getElementById("wordPost"),
 		wrongPost = document.getElementById("lettersGuessed"),
-		catigoryPost = document.getElementById("catigory"),
+		categoryPost = document.getElementById("category"),
 		guessLeftPost = document.getElementById("guessLeft"),
 		guessedCount = document.getElementById("wrongGuess"),
 		winPost = document.getElementsByClassName("wins")[0],
@@ -51,7 +51,7 @@
 
 			//print words to screen
 			pressAnyKey();
-			//selects the subject catigory, selects word and loads it, prints word to the screen
+			//selects the subject category, selects word and loads it, prints word to the screen
 			Selector();
 
 		//Check if a word has been selected
@@ -115,7 +115,7 @@
 			}
 		}
 
-		guessLeftPost.innerHTML = wrongGuessCount;
+		guessLeftPost.innerHTML = maxGuess - wrongGuessCount;
 	}
 
 
@@ -164,7 +164,7 @@
 		console.log("Category Var is set to: " + category);
 
 		//posts the Catigory
-		catigoryPost.innerText = category;
+		categoryPost.innerText = category;
 
 		//runs wordSelectLoad
 		wordSelectLoad(category);
@@ -335,6 +335,9 @@
 			//Update lossCount in HTML
 			lossPost.innerHTML = lossCount;
 
+			//reset guess array
+			guessArray = [];
+
 		}
 
 	}
@@ -364,7 +367,8 @@
 			console.log("wrongGuessCount is now " + wrongGuessCount);
 			console.log("Pushing " + letter + " to guessArray");
 			guessArray.push(letter);
-			console.log("guessArray now reads: " + guessArray);		
+			console.log("guessArray now reads: " + guessArray);
+			guessedCount.innerText = wrongGuessCount;
 		}
 
 		//Check if the game is lost
