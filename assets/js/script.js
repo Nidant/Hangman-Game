@@ -2,10 +2,14 @@
 //Starting Variables===============================================================================================
 
 	var wordPost = document.getElementById("wordPost"),
-		wrongPost = document.getElementById("wrongGuess"),
+		wrongPost = document.getElementById("lettersGuessed"),
+		catigoryPost = document.getElementById("catigory"),
 		guessLeftPost = document.getElementById("guessLeft"),
-		winPost = document.getElementById("wins"),
+		guessedCount = document.getElementById("wrongGuess"),
+		winPost = document.getElementsByClassName("wins")[0],
+		winPopUpPost = document.getElementById("win"),
 		lossPost = document.getElementById("losses"),
+		newGameBtn = document.getElementsByClassName("btn")[0],
 		messageBoard = document.getElementById("messageBoard"),
 		loadScreen = document.getElementsByClassName("startScreen")[0], 
 		winScreen = document.getElementsByClassName("winScreen")[0],
@@ -21,12 +25,10 @@
 		word = "",
 		wordArray = [],
 		guessArray = [],
-		guessedWordArray = [],
+		guessedWordArray = [" "],
 		categoryList = ["characters", "levels"],
 		characters = ["Genji", "McCree", "Pharah", "Reaper", "Solder: 76", "Sombara", "Tracer", "Bastion", "Hanzo", "Junkrat", "Mei", "Torbjorn", "Widowmaker", "D.VA", "Orisa", "Reinhardt", "Roadhog", "Winston", "Zarya", "Ana", "Lucio", "Mercy", "Symmetra", "Zenyatta"],
 		levels = ["Hanamura","Horizon Lunar Colony"," Temple of Anubis","Volskaya Industries","Dorado","Route 66","Watchpoint Gibraltar","Hollywood","Kings Row","Numbani","Eichenwalde","Ilios","Lijang Tower","Nepal","Oasis","Black Forest","Castillo","Encopoint Antarctica","Necropolis",];
-
-
 
 
 
@@ -59,7 +61,7 @@
 			guessCompare(letter);
 
 			//for testing
-			console.log("Test Test Test guessArray is now: " + guessArray);
+			console.log("guessArray is now: " + guessArray);
 
 
 			printWord();
@@ -69,14 +71,51 @@
 
 	},true );
 
+	//restarts the game
+	newGameBtn.addEventListener('click', function(){
+		newGame();
+	},true );
+
 //functions=====================================================================================================
 	
 	//Prints guessed word to the Viewpoint
 	function printWord(){
 
-		wordPost.innerText = guessedWordArray.join("");
-		console.log("GuessWordArray printed " + guessedWordArray.join(""));
-		console.log("GuessWordArray value is now " + guessedWordArray);
+		//clears on screen test before repost
+		wordPost.innerHTML = "";
+		wrongPost.innerHTML = "";
+
+		//Print guessedWordArray to Word Post
+		for (var i = 0; i < guessedWordArray.length; i++) {
+		
+			//holds letter to be printed
+			var temp1 = guessedWordArray[i] + " ";
+
+			//prints the word to the display with a space between letters
+			addWordPost(temp1);
+
+			//prints test logs to the Console
+			console.log("guessWordArray printed " + guessedWordArray);
+			console.log("guessWordArray value is now " + guessedWordArray);
+		}
+
+		if (typeof guessArray !== 'undefined' && guessArray.length > 0) {
+			//Print guessedWordArray to Word Post
+			for (var i = 0; i < guessArray.length; i++) {
+			
+				//holds letter to be printed
+				var temp2 = guessArray[i] + " ";
+
+				//prints the word to the display with a space between letters
+				addWrongGuessPost(temp2);
+
+				//prints test logs to the Console
+				console.log("guessArray printed " + guessArray);
+				console.log("guessArray value is now " + guessArray);
+			}
+		}
+
+		guessLeftPost.innerHTML = wrongGuessCount;
 	}
 
 
@@ -123,6 +162,9 @@
 		//selects random category
 		category = categoryList[Math.floor(Math.random()*categoryList.length)]
 		console.log("Category Var is set to: " + category);
+
+		//posts the Catigory
+		catigoryPost.innerText = category;
 
 		//runs wordSelectLoad
 		wordSelectLoad(category);
@@ -225,8 +267,17 @@
 		//if Guessed wrong 
 		if(test){
 
-			//see wrong guess
-			wrongGuess(letter);
+			//tests if alphanumeric			
+			var patt = /^[a-z0-9]+$/i;
+			var check = patt.test(letter);
+
+
+			if(check){
+
+				//see wrong guess
+				wrongGuess(letter);
+
+			}
 
 		}else{
 
@@ -247,13 +298,19 @@
 
 		if(b===a){
 			//sets flagWin
+
 			flagWin = true;
+
 			//show messgae
 			winScreen.style.display = "block";
 			messageBoard.style.display = "block";
+
 			//update winCount
 			winCount++;
-			console.log("winCount is now: " + winCount)
+			console.log("winCount is now: " + winCount);
+
+			//updates winCount in HTML
+			winPost.innerHTML = winCount;
 		}
 	}
 
@@ -263,14 +320,21 @@
 	//checks if the game is lost
 	function loss(){
 		if(wrongGuessCount >= maxGuess){
+
 			//sets flagLoss 
 			flagLoss = true;
+
 			//show messgae
 			lossScreen.style.display = "block";
 			messageBoard.style.display = "block";
+
 			//update lossCount
 			lossCount++;
-			console.log("lossCount is now: " + lossCount)
+			console.log("lossCount is now: " + lossCount);
+
+			//Update lossCount in HTML
+			lossPost.innerHTML = lossCount;
+
 		}
 
 	}
@@ -285,7 +349,8 @@
 
 		//test if the guessArray null
 		if (guessArray.length > 1) {
-			for (var i = 0; i <= guessArray.length; i++) {
+			for (var i = 0; i < guessArray.length; i++) {
+				console.log("guessArray is now: " + guessArray)
 				if(guessArray[i].toUpperCase()===letter.toUpperCase()){
 					test = false;
 					console.log("test is now: " + test);
@@ -318,4 +383,14 @@
 
 	//---------------------------------------------------------------------------------------------
 
+	//add 
+	function addWordPost(text) {
+	  var newtext = document.createTextNode(text);
+	  wordPost.appendChild(newtext);
+	}
 
+	//add 
+	function addWrongGuessPost(text) {
+	  var newtext = document.createTextNode(text);
+	  wrongPost.appendChild(newtext);
+	}

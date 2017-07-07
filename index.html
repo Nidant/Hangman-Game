@@ -12,12 +12,12 @@
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Brand</a>
+	      <a class="navbar-brand" href="#"><img id="brand" src="https://png.icons8.com/overwatch/color/24" title="Overwatch""></a>
 	    </div>
 	    <!--Win/Loss-->
     	<ul class="nav nav-pills navbar-right">
-		  <li role="presentation" class="navbar-text">Wins <strong id="wins">0</strong></li>
-		  <li role="presentation" class="navbar-text">Losses <strong id="losses">0</strong></li>
+		  <li role="presentation" class="navbar-text">Wins <span class="wins">0</span></li>
+		  <li role="presentation" class="navbar-text">Losses <span id="losses">0</span></li>
 		</ul>
 	  </div><!-- /.container-fluid -->
 	</nav>
@@ -27,7 +27,7 @@
 			<p class="text-center">Press any button to continue</p>
 		</div><!--/Start Screen-->
 		<div class="winScreen"><!--Win Screen-->
-			<h2 class="text-center">You did it!!!! You won your<strong id="wins">0</strong> game!</h2>
+			<h2 class="text-center">You did it!!!! You won!!!</h2>
 			<p class="text-center">Press anykey to start the next game.</p>
 			<button class="btn btn-primary center-block">Start Fresh</button>
 		</div><!--/Win Screen-->
@@ -41,16 +41,16 @@
 	<div class="container">
 		<div class="row">
 			<!--Right Column -->
-			<div class="col-lg-3 col-lg-offset-1">
-				<img class="rounded mx-auto d-block" src="assets\images\McCree_Spray_-_Noose_258x410.png">
+			<div class="col-lg-3 col-lg-offset-1 text-center">
+				<img class="rounded mx-auto d-block text-center" src="assets\images\McCree_Spray_-_Noose_258x410.png">
 			</div><!-- /.row left-->
 			<!--Center Column -->
 			<div class="col-lg-4">
-				<div class="row">
-					<h2>The catigory is </h2>
+				<div class="row text-center">
+					<h2>The catigory is <span id="catigory"></span></h2>
 				</div>
-				<div class="row">
-					<h3 id="wordPost"></h3>
+				<div class="row text-center">
+					<h3 id="wordPost" class="text-center"></h3>
 				</div>
 			</div><!-- /.row center-->
 			<!--Right Column -->
